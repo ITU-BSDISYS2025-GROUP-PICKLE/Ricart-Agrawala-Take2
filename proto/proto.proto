@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+option go_package = "Ricart-Agrawala-Take2/proto";
+
+message ExampleMsg {
+    int32 something = 1;
+    string another = 2;
+}
+
+message Empty {}
+
+service ExampleService {
+    rpc RPCFunc1(Empty) returns (ExampleMsg);
+}
