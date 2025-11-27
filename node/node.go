@@ -5,10 +5,12 @@ import (
 	"log"
 	"net"
 	"os"
+	"strconv"
 	"sync"
 	"time"
 
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 
 	pb "module/proto"
 )
@@ -17,14 +19,15 @@ import (
 type Node struct {
 	pb.UnimplementedNodeServer
 
-	port  string // Serves as both the localhost port and ID
-	peers []string
+	port  string   // Serves as both the localhost port and ID
+	peers []string // Slice of peer-ports
 
 	mu      sync.Mutex
-	state   string
-	lamport int32
+	state   string // Must be among { "RELEASED", "WANTED", "HELD" }
+	lamport int32  // Lamport timestamp
+	replies int    // Number of received replies
 
-	queued_replies []string
+	queued_replies []string // Slice of peer-ports to reply to after leaving CS
 }
 
 // Start a node server. Runs indefinitely
@@ -51,8 +54,60 @@ func (n *Node) StartServer() {
 	}
 }
 
+// Request CS access from all peers
+func (n *Node) RequestCSFromPeers() {
+	for _, peer := range n.peers {
+		go n.RequestCSFromPeer(peer)
+	}
+
+	for n.replies < len(n.peers) {
+		// Wait for replies from all peers...
+	}
+
+	n.EnterAndLeaveCS()
+}
+
+// Request CS access from a peer at a given address
+func (n *Node) RequestCSFromPeer(peer_port string) {
+	// Create address
+	address := "localhost:" + peer_port
+
+	// Create connection
+	conn, err := grpc.NewClient(address, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	if err != nil {
+		log.Fatalf("Connect to server failed: %v", err)
+	}
+
+	// Create intermediate peer client
+	peer := pb.NewNodeClient(conn)
+
+	// Create CS request
+	portInt, err := strconv.Atoi(n.port)
+	if err != nil {
+		log.Fatalf("Node-port conversion failed: %v", err)
+	}
+
+	portInt32 := int32(portInt)
+
+	req := &pb.CSRequest{
+		NodePort: portInt32,
+		Lamport:  n.lamport,
+	}
+
+	// Request CS from peer
+	_, err = peer.ReceiveCSRequest(context.Background(), req)
+	if err != nil {
+		log.Fatalf("ReceiveCSRequest failed: %v", err)
+	}
+
+	// Increment the requesting node's amount of received replies
+	n.mu.Lock()
+	n.replies++
+	n.mu.Unlock()
+}
+
 // RPC function
-func (n *Node) ReceiveCSRequest(_ context.Context, req *pb.CSRequest) (*pb.CSResponse, error) {
+func (n *Node) ReceiveCSRequest(_ context.Context, req *pb.CSRequest) (*pb.Empty, error) {
 	// TODO: Implement
 	return nil, nil
 }
@@ -63,7 +118,7 @@ func (n *Node) RespondToCSRequest(peer string) {
 }
 
 // Simulate entering the critical section
-func (n *Node) EnterCS() {
+func (n *Node) EnterAndLeaveCS() {
 	// TODO: Implement
 }
 
