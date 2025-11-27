@@ -26,7 +26,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type NodeClient interface {
-	ReceiveCSRequest(ctx context.Context, in *CSRequest, opts ...grpc.CallOption) (*CSResponse, error)
+	ReceiveCSRequest(ctx context.Context, in *CSRequest, opts ...grpc.CallOption) (*Empty, error)
 }
 
 type nodeClient struct {
@@ -37,9 +37,9 @@ func NewNodeClient(cc grpc.ClientConnInterface) NodeClient {
 	return &nodeClient{cc}
 }
 
-func (c *nodeClient) ReceiveCSRequest(ctx context.Context, in *CSRequest, opts ...grpc.CallOption) (*CSResponse, error) {
+func (c *nodeClient) ReceiveCSRequest(ctx context.Context, in *CSRequest, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CSResponse)
+	out := new(Empty)
 	err := c.cc.Invoke(ctx, Node_ReceiveCSRequest_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -51,7 +51,7 @@ func (c *nodeClient) ReceiveCSRequest(ctx context.Context, in *CSRequest, opts .
 // All implementations must embed UnimplementedNodeServer
 // for forward compatibility.
 type NodeServer interface {
-	ReceiveCSRequest(context.Context, *CSRequest) (*CSResponse, error)
+	ReceiveCSRequest(context.Context, *CSRequest) (*Empty, error)
 	mustEmbedUnimplementedNodeServer()
 }
 
@@ -62,7 +62,7 @@ type NodeServer interface {
 // pointer dereference when methods are called.
 type UnimplementedNodeServer struct{}
 
-func (UnimplementedNodeServer) ReceiveCSRequest(context.Context, *CSRequest) (*CSResponse, error) {
+func (UnimplementedNodeServer) ReceiveCSRequest(context.Context, *CSRequest) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReceiveCSRequest not implemented")
 }
 func (UnimplementedNodeServer) mustEmbedUnimplementedNodeServer() {}

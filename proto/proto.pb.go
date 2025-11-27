@@ -73,26 +73,26 @@ func (x *CSRequest) GetLamport() int32 {
 	return 0
 }
 
-type CSResponse struct {
+type Empty struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CSResponse) Reset() {
-	*x = CSResponse{}
+func (x *Empty) Reset() {
+	*x = Empty{}
 	mi := &file_proto_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CSResponse) String() string {
+func (x *Empty) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CSResponse) ProtoMessage() {}
+func (*Empty) ProtoMessage() {}
 
-func (x *CSResponse) ProtoReflect() protoreflect.Message {
+func (x *Empty) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -104,8 +104,8 @@ func (x *CSResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CSResponse.ProtoReflect.Descriptor instead.
-func (*CSResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use Empty.ProtoReflect.Descriptor instead.
+func (*Empty) Descriptor() ([]byte, []int) {
 	return file_proto_proto_rawDescGZIP(), []int{1}
 }
 
@@ -116,12 +116,11 @@ const file_proto_proto_rawDesc = "" +
 	"\vproto.proto\"B\n" +
 	"\tCSRequest\x12\x1b\n" +
 	"\tnode_port\x18\x01 \x01(\x05R\bnodePort\x12\x18\n" +
-	"\alamport\x18\x02 \x01(\x05R\alamport\"\f\n" +
-	"\n" +
-	"CSResponse23\n" +
-	"\x04Node\x12+\n" +
+	"\alamport\x18\x02 \x01(\x05R\alamport\"\a\n" +
+	"\x05Empty2.\n" +
+	"\x04Node\x12&\n" +
 	"\x10ReceiveCSRequest\x12\n" +
-	".CSRequest\x1a\v.CSResponseB\x1dZ\x1bRicart-Agrawala-Take2/protob\x06proto3"
+	".CSRequest\x1a\x06.EmptyB\x1dZ\x1bRicart-Agrawala-Take2/protob\x06proto3"
 
 var (
 	file_proto_proto_rawDescOnce sync.Once
@@ -137,12 +136,12 @@ func file_proto_proto_rawDescGZIP() []byte {
 
 var file_proto_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_proto_proto_goTypes = []any{
-	(*CSRequest)(nil),  // 0: CSRequest
-	(*CSResponse)(nil), // 1: CSResponse
+	(*CSRequest)(nil), // 0: CSRequest
+	(*Empty)(nil),     // 1: Empty
 }
 var file_proto_proto_depIdxs = []int32{
 	0, // 0: Node.ReceiveCSRequest:input_type -> CSRequest
-	1, // 1: Node.ReceiveCSRequest:output_type -> CSResponse
+	1, // 1: Node.ReceiveCSRequest:output_type -> Empty
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
