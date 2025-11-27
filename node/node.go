@@ -94,4 +94,5 @@ func main() {
 
 	// Shut down after 2 minutes
 	time.Sleep(2 * time.Minute)
+	log.Println("Server shutting down...")
 }
