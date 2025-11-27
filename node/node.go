@@ -100,10 +100,11 @@ func (n *Node) RequestCSFromPeer(peer_port string) {
 		log.Fatalf("ReceiveCSRequest failed: %v", err)
 	}
 
+	// TODO: This functionality goes in RespondToCSRequest(...)
 	// Increment the requesting node's amount of received replies
-	n.mu.Lock()
-	n.replies++
-	n.mu.Unlock()
+	// n.mu.Lock()
+	// n.replies++
+	// n.mu.Unlock()
 }
 
 // RPC function
