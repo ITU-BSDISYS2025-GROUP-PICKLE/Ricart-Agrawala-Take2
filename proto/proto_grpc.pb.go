@@ -19,101 +19,101 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ExampleService_RPCFunc1_FullMethodName = "/ExampleService/RPCFunc1"
+	Node_ReceiveCSRequest_FullMethodName = "/Node/ReceiveCSRequest"
 )
 
-// ExampleServiceClient is the client API for ExampleService service.
+// NodeClient is the client API for Node service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ExampleServiceClient interface {
-	RPCFunc1(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ExampleMsg, error)
+type NodeClient interface {
+	ReceiveCSRequest(ctx context.Context, in *CSRequest, opts ...grpc.CallOption) (*CSResponse, error)
 }
 
-type exampleServiceClient struct {
+type nodeClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewExampleServiceClient(cc grpc.ClientConnInterface) ExampleServiceClient {
-	return &exampleServiceClient{cc}
+func NewNodeClient(cc grpc.ClientConnInterface) NodeClient {
+	return &nodeClient{cc}
 }
 
-func (c *exampleServiceClient) RPCFunc1(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ExampleMsg, error) {
+func (c *nodeClient) ReceiveCSRequest(ctx context.Context, in *CSRequest, opts ...grpc.CallOption) (*CSResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ExampleMsg)
-	err := c.cc.Invoke(ctx, ExampleService_RPCFunc1_FullMethodName, in, out, cOpts...)
+	out := new(CSResponse)
+	err := c.cc.Invoke(ctx, Node_ReceiveCSRequest_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ExampleServiceServer is the server API for ExampleService service.
-// All implementations must embed UnimplementedExampleServiceServer
+// NodeServer is the server API for Node service.
+// All implementations must embed UnimplementedNodeServer
 // for forward compatibility.
-type ExampleServiceServer interface {
-	RPCFunc1(context.Context, *Empty) (*ExampleMsg, error)
-	mustEmbedUnimplementedExampleServiceServer()
+type NodeServer interface {
+	ReceiveCSRequest(context.Context, *CSRequest) (*CSResponse, error)
+	mustEmbedUnimplementedNodeServer()
 }
 
-// UnimplementedExampleServiceServer must be embedded to have
+// UnimplementedNodeServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedExampleServiceServer struct{}
+type UnimplementedNodeServer struct{}
 
-func (UnimplementedExampleServiceServer) RPCFunc1(context.Context, *Empty) (*ExampleMsg, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RPCFunc1 not implemented")
+func (UnimplementedNodeServer) ReceiveCSRequest(context.Context, *CSRequest) (*CSResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReceiveCSRequest not implemented")
 }
-func (UnimplementedExampleServiceServer) mustEmbedUnimplementedExampleServiceServer() {}
-func (UnimplementedExampleServiceServer) testEmbeddedByValue()                        {}
+func (UnimplementedNodeServer) mustEmbedUnimplementedNodeServer() {}
+func (UnimplementedNodeServer) testEmbeddedByValue()              {}
 
-// UnsafeExampleServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ExampleServiceServer will
+// UnsafeNodeServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to NodeServer will
 // result in compilation errors.
-type UnsafeExampleServiceServer interface {
-	mustEmbedUnimplementedExampleServiceServer()
+type UnsafeNodeServer interface {
+	mustEmbedUnimplementedNodeServer()
 }
 
-func RegisterExampleServiceServer(s grpc.ServiceRegistrar, srv ExampleServiceServer) {
-	// If the following call pancis, it indicates UnimplementedExampleServiceServer was
+func RegisterNodeServer(s grpc.ServiceRegistrar, srv NodeServer) {
+	// If the following call pancis, it indicates UnimplementedNodeServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&ExampleService_ServiceDesc, srv)
+	s.RegisterService(&Node_ServiceDesc, srv)
 }
 
-func _ExampleService_RPCFunc1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Empty)
+func _Node_ReceiveCSRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CSRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ExampleServiceServer).RPCFunc1(ctx, in)
+		return srv.(NodeServer).ReceiveCSRequest(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ExampleService_RPCFunc1_FullMethodName,
+		FullMethod: Node_ReceiveCSRequest_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ExampleServiceServer).RPCFunc1(ctx, req.(*Empty))
+		return srv.(NodeServer).ReceiveCSRequest(ctx, req.(*CSRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// ExampleService_ServiceDesc is the grpc.ServiceDesc for ExampleService service.
+// Node_ServiceDesc is the grpc.ServiceDesc for Node service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var ExampleService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "ExampleService",
-	HandlerType: (*ExampleServiceServer)(nil),
+var Node_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "Node",
+	HandlerType: (*NodeServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "RPCFunc1",
-			Handler:    _ExampleService_RPCFunc1_Handler,
+			MethodName: "ReceiveCSRequest",
+			Handler:    _Node_ReceiveCSRequest_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

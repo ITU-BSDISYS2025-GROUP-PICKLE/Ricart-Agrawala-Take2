@@ -2,13 +2,13 @@ syntax = "proto3";
 
 option go_package = "Ricart-Agrawala-Take2/proto";
 
-message ExampleMsg {
-    int32 something = 1;
-    string another = 2;
+message CSRequest {
+    int32 node_port = 1;
+    int32 lamport = 2;
 }
 
-message Empty {}
+message CSResponse {}
 
-service ExampleService {
-    rpc RPCFunc1(Empty) returns (ExampleMsg);
+service Node {
+    rpc ReceiveCSRequest(CSRequest) returns (CSResponse);
 }
