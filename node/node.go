@@ -19,7 +19,7 @@ import (
 type Node struct {
 	pb.UnimplementedNodeServer
 
-	port  int32    // Serves as both the localhost port and ID
+	port  int32    // Serves as both the localhost port and node ID
 	peers []string // Slice of peer-ports
 
 	mu      sync.Mutex
@@ -59,7 +59,7 @@ func (n *Node) StartServer() {
 
 // Request CS access from all peers. Lecture 7 slide 15/50 'on enter do' part
 func (n *Node) RequestCSFromPeers() {
-	// Change state and increase lamport timestamp
+	// Change state and increase Lamport timestamp
 	n.mu.Lock()
 	n.state = "WANTED"
 	n.lamport++
@@ -73,10 +73,10 @@ func (n *Node) RequestCSFromPeers() {
 
 	// Wait for replies from all peers...
 	for n.replies < len(n.peers) {
-		//time.Sleep(time.Second) // Check once per second instead of thousands of times
+		time.Sleep(100 * time.Millisecond) // Check ten times per sec instead of thousands
 	}
 
-	//Change state
+	// Change state
 	n.mu.Lock()
 	n.state = "HELD"
 	n.mu.Unlock()
@@ -112,7 +112,7 @@ func (n *Node) RequestCSFromPeer(peer_port string) {
 	}
 }
 
-// RPC function
+// RPC function. Receive and handle a CS request from a peer
 func (n *Node) ReceiveCSRequest(_ context.Context, req *pb.CSRequest) (*pb.Empty, error) {
 	// Create address
 	reqPort := strconv.Itoa(int(req.NodePort))
@@ -137,8 +137,7 @@ func (n *Node) ReceiveCSRequest(_ context.Context, req *pb.CSRequest) (*pb.Empty
 	return &pb.Empty{}, nil
 }
 
-// Return whether a node is 'less than' another.
-// Primarily determined by Lamport timestamp, otherwise port-number
+// Return whether a node is 'less than' another. Primarily determined by Lamport timestamp, otherwise port-number
 func (n *Node) IsLessThanPeer(peerReq *pb.CSRequest) bool {
 	if n.lamport == peerReq.Lamport {
 		return n.port < peerReq.NodePort
@@ -183,7 +182,7 @@ func (n *Node) IncrementReceived(_ context.Context, resp *pb.CSResponse) (*pb.Em
 func (n *Node) EnterAndLeaveCS() {
 	// Enter and do something cool in the critical section
 	log.Printf("Node #%d [T:%d] entered the critical section 🚨🐔", n.port, n.lamport)
-	time.Sleep(3 * time.Second)
+	time.Sleep(3 * time.Second) // Super cool stuff going on here 🗣️
 	log.Printf("Node #%d [T:%d] left the critical section 😴💭🐑", n.port, n.lamport)
 
 	// Lecture 7 slide 15/50 'on exit do' part
