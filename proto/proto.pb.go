@@ -73,6 +73,58 @@ func (x *CSRequest) GetLamport() int32 {
 	return 0
 }
 
+type CSResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	NodePort      int32                  `protobuf:"varint,1,opt,name=node_port,json=nodePort,proto3" json:"node_port,omitempty"`
+	Lamport       int32                  `protobuf:"varint,2,opt,name=lamport,proto3" json:"lamport,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CSResponse) Reset() {
+	*x = CSResponse{}
+	mi := &file_proto_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CSResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CSResponse) ProtoMessage() {}
+
+func (x *CSResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CSResponse.ProtoReflect.Descriptor instead.
+func (*CSResponse) Descriptor() ([]byte, []int) {
+	return file_proto_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *CSResponse) GetNodePort() int32 {
+	if x != nil {
+		return x.NodePort
+	}
+	return 0
+}
+
+func (x *CSResponse) GetLamport() int32 {
+	if x != nil {
+		return x.Lamport
+	}
+	return 0
+}
+
 type Empty struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -81,7 +133,7 @@ type Empty struct {
 
 func (x *Empty) Reset() {
 	*x = Empty{}
-	mi := &file_proto_proto_msgTypes[1]
+	mi := &file_proto_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -93,7 +145,7 @@ func (x *Empty) String() string {
 func (*Empty) ProtoMessage() {}
 
 func (x *Empty) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_proto_msgTypes[1]
+	mi := &file_proto_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -106,7 +158,7 @@ func (x *Empty) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Empty.ProtoReflect.Descriptor instead.
 func (*Empty) Descriptor() ([]byte, []int) {
-	return file_proto_proto_rawDescGZIP(), []int{1}
+	return file_proto_proto_rawDescGZIP(), []int{2}
 }
 
 var File_proto_proto protoreflect.FileDescriptor
@@ -116,11 +168,16 @@ const file_proto_proto_rawDesc = "" +
 	"\vproto.proto\"B\n" +
 	"\tCSRequest\x12\x1b\n" +
 	"\tnode_port\x18\x01 \x01(\x05R\bnodePort\x12\x18\n" +
+	"\alamport\x18\x02 \x01(\x05R\alamport\"C\n" +
+	"\n" +
+	"CSResponse\x12\x1b\n" +
+	"\tnode_port\x18\x01 \x01(\x05R\bnodePort\x12\x18\n" +
 	"\alamport\x18\x02 \x01(\x05R\alamport\"\a\n" +
-	"\x05Empty2.\n" +
+	"\x05Empty2X\n" +
 	"\x04Node\x12&\n" +
 	"\x10ReceiveCSRequest\x12\n" +
-	".CSRequest\x1a\x06.EmptyB\x1dZ\x1bRicart-Agrawala-Take2/protob\x06proto3"
+	".CSRequest\x1a\x06.Empty\x12(\n" +
+	"\x11IncrementReceived\x12\v.CSResponse\x1a\x06.EmptyB\x1dZ\x1bRicart-Agrawala-Take2/protob\x06proto3"
 
 var (
 	file_proto_proto_rawDescOnce sync.Once
@@ -134,16 +191,19 @@ func file_proto_proto_rawDescGZIP() []byte {
 	return file_proto_proto_rawDescData
 }
 
-var file_proto_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_proto_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_proto_proto_goTypes = []any{
-	(*CSRequest)(nil), // 0: CSRequest
-	(*Empty)(nil),     // 1: Empty
+	(*CSRequest)(nil),  // 0: CSRequest
+	(*CSResponse)(nil), // 1: CSResponse
+	(*Empty)(nil),      // 2: Empty
 }
 var file_proto_proto_depIdxs = []int32{
 	0, // 0: Node.ReceiveCSRequest:input_type -> CSRequest
-	1, // 1: Node.ReceiveCSRequest:output_type -> Empty
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	1, // 1: Node.IncrementReceived:input_type -> CSResponse
+	2, // 2: Node.ReceiveCSRequest:output_type -> Empty
+	2, // 3: Node.IncrementReceived:output_type -> Empty
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -160,7 +220,7 @@ func file_proto_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_proto_rawDesc), len(file_proto_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

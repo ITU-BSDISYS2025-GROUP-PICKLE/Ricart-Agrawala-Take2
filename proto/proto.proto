@@ -7,8 +7,14 @@ message CSRequest {
     int32 lamport = 2;
 }
 
+message CSResponse {
+    int32 node_port = 1;
+    int32 lamport = 2;
+}
+
 message Empty {}
 
 service Node {
     rpc ReceiveCSRequest(CSRequest) returns (Empty);
+    rpc IncrementReceived(CSResponse) returns (Empty);
 }
