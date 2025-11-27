@@ -1,22 +1,30 @@
 package main
 
 import (
+	"context"
 	"log"
-	pb "module/proto"
 	"net"
 	"os"
+	"sync"
+	"time"
 
 	"google.golang.org/grpc"
+
+	pb "module/proto"
 )
 
 // Node object
 type Node struct {
 	pb.UnimplementedNodeServer
 
-	port    string
-	peers   []string
+	port  string // Serves as both the localhost port and ID
+	peers []string
+
+	mu      sync.Mutex
 	state   string
 	lamport int32
+
+	queued_replies []string
 }
 
 // Start a node server. Runs indefinitely
@@ -43,6 +51,22 @@ func (n *Node) StartServer() {
 	}
 }
 
+// RPC function
+func (n *Node) ReceiveCSRequest(_ context.Context, req *pb.CSRequest) (*pb.CSResponse, error) {
+	// TODO: Implement
+	return nil, nil
+}
+
+// Respond to a received CS request
+func (n *Node) RespondToCSRequest(peer string) {
+	// TODO: Implement
+}
+
+// Simulate entering the critical section
+func (n *Node) EnterCS() {
+	// TODO: Implement
+}
+
 func main() {
 	if len(os.Args) < 3 {
 		// Even though we're really looking for 2 (or more) arguments, we expect 3 (or more)
@@ -63,5 +87,11 @@ func main() {
 		lamport: 0,
 	}
 
-	n.StartServer()
+	// Start server
+	go n.StartServer()
+
+	// TODO: Request CS a few times
+
+	// Shut down after 2 minutes
+	time.Sleep(2 * time.Minute)
 }
