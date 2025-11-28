@@ -1,37 +1,37 @@
-2025/11/27 18:22:33 Node server now listening on localhost:50053
-2025/11/27 18:22:35 Node #50053 [T:0] responded directly to Node #50051 [T:1]
-2025/11/27 18:22:35 Node #50053 [T:2] responded directly to Node #50052 [T:3]
-2025/11/27 18:22:36 Node #50053 [T:5] is requesting access to the critical section
-2025/11/27 18:22:38 Node #50053 [T:5] received a reply from Node #50051 [T:6]
-2025/11/27 18:22:38 Node #50053 [T:5] queued responding to Node #50051 [T:7]
-2025/11/27 18:22:41 Node #50053 [T:8] received a reply from Node #50052 [T:8]
-2025/11/27 18:22:41 Node #50053 [T:8] entered the critical section 🚨🐔
-2025/11/27 18:22:41 Node #50053 [T:8] queued responding to Node #50052 [T:9]
-2025/11/27 18:22:44 Node #50053 [T:10] left the critical section 😴💭🐑
-2025/11/27 18:22:44 Node #50053 [T:11] is requesting access to the critical section
-2025/11/27 18:22:47 Node #50053 [T:11] received a reply from Node #50051 [T:12]
-2025/11/27 18:22:47 Node #50053 [T:11] queued responding to Node #50051 [T:13]
-2025/11/27 18:22:50 Node #50053 [T:14] received a reply from Node #50052 [T:14]
-2025/11/27 18:22:50 Node #50053 [T:14] entered the critical section 🚨🐔
-2025/11/27 18:22:50 Node #50053 [T:14] queued responding to Node #50052 [T:15]
-2025/11/27 18:22:53 Node #50053 [T:16] left the critical section 😴💭🐑
-2025/11/27 18:22:53 Node #50053 [T:17] is requesting access to the critical section
-2025/11/27 18:22:56 Node #50053 [T:17] received a reply from Node #50051 [T:18]
-2025/11/27 18:22:56 Node #50053 [T:17] queued responding to Node #50051 [T:19]
-2025/11/27 18:22:59 Node #50053 [T:20] received a reply from Node #50052 [T:20]
-2025/11/27 18:22:59 Node #50053 [T:20] entered the critical section 🚨🐔
-2025/11/27 18:22:59 Node #50053 [T:20] queued responding to Node #50052 [T:21]
-2025/11/27 18:23:02 Node #50053 [T:22] left the critical section 😴💭🐑
-2025/11/27 18:23:02 Node #50053 [T:23] is requesting access to the critical section
-2025/11/27 18:23:05 Node #50053 [T:23] received a reply from Node #50051 [T:24]
-2025/11/27 18:23:05 Node #50053 [T:23] queued responding to Node #50051 [T:25]
-2025/11/27 18:23:08 Node #50053 [T:26] received a reply from Node #50052 [T:26]
-2025/11/27 18:23:08 Node #50053 [T:26] entered the critical section 🚨🐔    
-2025/11/27 18:23:08 Node #50053 [T:26] queued responding to Node #50052 [T:27]
-2025/11/27 18:23:11 Node #50053 [T:28] left the critical section 😴💭🐑     
-2025/11/27 18:23:11 Node #50053 [T:29] is requesting access to the critical section
-2025/11/27 18:23:14 Node #50053 [T:29] received a reply from Node #50051 [T:30]
-2025/11/27 18:23:17 Node #50053 [T:29] received a reply from Node #50052 [T:30]
-2025/11/27 18:23:17 Node #50053 [T:29] entered the critical section 🚨🐔    
-2025/11/27 18:23:20 Node #50053 [T:29] left the critical section 😴💭🐑     
-2025/11/27 18:23:20 Server shutting down...
+2025/11/28 12:14:35 Node server now listening on localhost:50053
+2025/11/28 12:14:38 Node #50053 [T:0] responded directly to Node #50051 [T:1]
+2025/11/28 12:14:38 Node #50053 [T:2] responded directly to Node #50052 [T:3]
+2025/11/28 12:14:38 Node #50053 [T:5] is requesting access to the critical section
+2025/11/28 12:14:41 Node #50053 [T:6] received a reply from Node #50051 [T:6]
+2025/11/28 12:14:41 Node #50053 [T:6] queued responding to Node #50051 [T:7]
+2025/11/28 12:14:44 Node #50053 [T:9] received a reply from Node #50052 [T:8]
+2025/11/28 12:14:44 Node #50053 [T:9] responded directly to Node #50052 [T:9]
+2025/11/28 12:14:44 Node #50053 [T:10] entered the critical section 🚨🐔
+2025/11/28 12:14:47 Node #50053 [T:10] left the critical section 😴💭🐑
+2025/11/28 12:14:47 Node #50053 [T:11] is requesting access to the critical section
+2025/11/28 12:14:50 Node #50053 [T:12] received a reply from Node #50051 [T:12]
+2025/11/28 12:14:50 Node #50053 [T:12] queued responding to Node #50051 [T:13]
+2025/11/28 12:14:53 Node #50053 [T:15] received a reply from Node #50052 [T:14]
+2025/11/28 12:14:53 Node #50053 [T:15] responded directly to Node #50052 [T:15]
+2025/11/28 12:14:53 Node #50053 [T:16] entered the critical section 🚨🐔
+2025/11/28 12:14:56 Node #50053 [T:16] left the critical section 😴💭🐑
+2025/11/28 12:14:56 Node #50053 [T:17] is requesting access to the critical section
+2025/11/28 12:14:59 Node #50053 [T:18] received a reply from Node #50051 [T:18]
+2025/11/28 12:14:59 Node #50053 [T:18] queued responding to Node #50051 [T:19]
+2025/11/28 12:15:02 Node #50053 [T:21] received a reply from Node #50052 [T:20]
+2025/11/28 12:15:02 Node #50053 [T:21] responded directly to Node #50052 [T:21]
+2025/11/28 12:15:02 Node #50053 [T:22] entered the critical section 🚨🐔
+2025/11/28 12:15:05 Node #50053 [T:22] left the critical section 😴💭🐑
+2025/11/28 12:15:05 Node #50053 [T:23] is requesting access to the critical section
+2025/11/28 12:15:08 Node #50053 [T:24] received a reply from Node #50051 [T:24]
+2025/11/28 12:15:08 Node #50053 [T:24] queued responding to Node #50051 [T:25]
+2025/11/28 12:15:11 Node #50053 [T:27] received a reply from Node #50052 [T:26]
+2025/11/28 12:15:11 Node #50053 [T:27] responded directly to Node #50052 [T:27]
+2025/11/28 12:15:11 Node #50053 [T:28] entered the critical section 🚨🐔    
+2025/11/28 12:15:14 Node #50053 [T:28] left the critical section 😴💭🐑     
+2025/11/28 12:15:14 Node #50053 [T:29] is requesting access to the critical section
+2025/11/28 12:15:17 Node #50053 [T:30] received a reply from Node #50051 [T:30]
+2025/11/28 12:15:20 Node #50053 [T:31] received a reply from Node #50052 [T:31]
+2025/11/28 12:15:20 Node #50053 [T:31] entered the critical section 🚨🐔    
+2025/11/28 12:15:23 Node #50053 [T:31] left the critical section 😴💭🐑     
+2025/11/28 12:15:23 Server shutting down...

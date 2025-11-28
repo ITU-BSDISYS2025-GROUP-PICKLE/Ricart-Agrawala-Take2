@@ -167,12 +167,13 @@ func (n *Node) RespondToCSRequest(address string) {
 	peer.IncrementReceived(context.Background(), resp)
 }
 
-// RPC function
+// RPC function. Increment a peer's amount of received replies (and Lamport timestamp)
 func (n *Node) IncrementReceived(_ context.Context, resp *pb.CSResponse) (*pb.Empty, error) {
 	n.mu.Lock()
 	defer n.mu.Unlock()
 
 	n.replies++
+	n.lamport++
 	log.Printf("Node #%d [T:%d] received a reply from Node #%d [T:%d]", n.port, n.lamport, resp.NodePort, resp.Lamport)
 
 	return &pb.Empty{}, nil
