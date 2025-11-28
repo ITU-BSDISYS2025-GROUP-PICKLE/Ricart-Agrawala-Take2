@@ -1,6 +1,11 @@
 # BSDISYS1KU Group pickle || Mandatory activity 4 take 2
 ## How to run the program
-%%% WORK IN PROGRESS %%%
+1. Open three different terminals and navigate to the '*node*' directory
+2. In the 1st terminal write: go run node.go 50051 50052 50053
+3. In the 2nd terminal write: go run node.go 50052 50051 50053
+4. In the 3rd terminal write: go run node.go 50053 50051 50052
+5. Press 'Enter' in each terminal in somewhat quick succession. The system will now start.
+6. Observe that system works: nodes may request the CS concurrently, but only one is given acces at a time 
 
 
 ## Description
